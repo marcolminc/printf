@@ -33,7 +33,7 @@ int _printf(const char *format, ...)
 			else if (c == '%')
 				numchar += _putchar('%');
 			else if (c == '\0')
-				return (numchar);
+				numchar += 0;
 			else
 			{
 				numchar += _putchar('%');
