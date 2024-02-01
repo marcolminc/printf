@@ -32,6 +32,8 @@ int _printf(const char *format, ...)
 				numchar += uoxX(ap, format[i]);
 			else if (c == '%')
 				numchar += _putchar('%');
+			else if (c == '\0')
+				return (numchar);
 			else
 			{
 				numchar += _putchar('%');
