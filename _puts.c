@@ -9,10 +9,7 @@
 int _puts(char *str)
 {
 	int numchar = 0;
-	char null_str[] = "(null)";
-
-	if (*str == NULL || *str == 0)
-		str = null_str;
+	
 	while (*str != '\0')
 	{
 		_putchar(*str);
