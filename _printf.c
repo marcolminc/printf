@@ -27,6 +27,7 @@ int _printf(const char *format, ...)
 					continue;
 				case 's':
 					str = va_arg(ap, char *);
+					str = str ? str : "(null)";
 					while (str && *str != '\0')
 						_putchar(*str++) ? chars++ : chars;
 					continue;
