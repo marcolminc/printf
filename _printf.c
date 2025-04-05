@@ -11,11 +11,10 @@ int _printf(const char *format, ...)
 {
 	int chars, i;
 	va_list ap;
-	char *str;
 
 	if (!format)
 		return (-1);
-	chars = 0, va_start(ap, format), str = NULL;
+	chars = 0, va_start(ap, format);
 	for (i = 0; format[i]; i++)
 	{
 		if (format[i] == '%')
@@ -26,14 +25,16 @@ int _printf(const char *format, ...)
 					_putchar(va_arg(ap, int)) ? chars++ : chars;
 					continue;
 				case 's':
-					str = va_arg(ap, char *);
-					str = str ? str : "(null)";
-					while (str && *str != '\0')
-						_putchar(*str++) ? chars++ : chars;
+					chars += print_str(va_arg(ap, char *));
 					continue;
 				case '%':
 					_putchar('%') ? chars++ : chars;
 					continue;
+				case 'd':
+				case 'i':
+					chars += print_int(va_arg(ap, int));
+					continue;
+
 				case '\0':
 					return (-1);
 				default:
