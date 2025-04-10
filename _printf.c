@@ -23,7 +23,7 @@ int _printf(const char *format, ...)
 				case 'c':
 					_putchar(va_arg(ap, int)) ? chars++ : chars;
 					continue;
-				case 's': case 'r':
+				case 's': case 'r': case 'R':
 					chars += print_str(va_arg(ap, char *), format[i]);
 					continue;
 				case '%':
