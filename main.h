@@ -9,7 +9,7 @@
 /* prototypes */
 int _putchar(char);
 int _printf(const char *format, ...);
-int print_str(char *);
+int print_str(char *, char);
 int print_int(int);
 int print_bin(int);
 
