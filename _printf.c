@@ -32,6 +32,8 @@ int _printf(const char *format, ...)
 					if (_putchar('%'))
 						chars++;
 					continue;
+				case '\0':
+					return (-1);
 				default:
 					i--;
 			}
