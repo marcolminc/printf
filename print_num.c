@@ -15,14 +15,24 @@ int print_num(int num, const char spec)
 	digits = 0;
 	switch (spec)
 	{
-		case 'd':
-		case 'i':
+		case 'd': case 'i':
 			digits += print_int(num);
 			break;
 
 		case 'b':
 			digits += print_bin(num);
 			break;
+		case 'u':
+			digits += print_unsigned(num);
+			break;
+		case 'o':
+			digits += print_unsigned_octal(num);
+			break;
+		case 'x':
+			digits += print_unsigned_hex(num, 0);
+			break;
+		case 'X':
+			digits += print_unsigned_hex(num, 1);
 		default:
 			break;
 	}
