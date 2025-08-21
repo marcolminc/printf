@@ -13,5 +13,6 @@ int print_str(char *, char);
 int print_int(int);
 int print_bin(int);
 int rot13(char *);
+int print_num(int, char);
 
 #endif /* MAIN_H */

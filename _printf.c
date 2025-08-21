@@ -27,13 +27,12 @@ int _printf(const char *format, ...)
 					continue;
 				case 'd':
 				case 'i':
-					chars += print_int(va_arg(ap, int));
-					continue;
 				case 'b':
-					chars += print_bin(va_arg(ap, int));
+					chars += print_num(va_arg(ap, int), format[i]);
 					continue;
 				case 's':
-					chars += print_str(va_arg(ap, char *), 's');
+				case 'r':
+					chars += print_str(va_arg(ap, char *), format[i]);
 					continue;
 				case '%':
 					if (_putchar('%'))
