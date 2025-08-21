@@ -25,6 +25,10 @@ int _printf(const char *format, ...)
 					if (_putchar(va_arg(ap, int)) != EOF)
 						chars++;
 					continue;
+				case 'd':
+				case 'i':
+					chars += print_int(va_arg(ap, int));
+					continue;
 				case 's':
 					chars += print_str(va_arg(ap, char *), 's');
 					continue;
