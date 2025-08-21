@@ -4,7 +4,7 @@
 /* includes */
 #include <stdarg.h>
 #include <stdlib.h>
-
+#include <stdio.h>
 
 /* prototypes */
 int _putchar(char);
