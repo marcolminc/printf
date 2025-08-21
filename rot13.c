@@ -7,7 +7,7 @@
  *
  * Return: 1 -> is alpha, 0 otherwise
  */
-int _isalpha(char c)
+int _isalpha(const char c)
 {
 	return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
 }
@@ -18,7 +18,7 @@ int _isalpha(char c)
  *
  * Return: actual number of characters printed
  */
-int rot13(char *str)
+int rot13(const char *str)
 {
 	int i, chars;
 	unsigned char c, base;
@@ -28,15 +28,15 @@ int rot13(char *str)
 	{
 		if (!_isalpha(*(str + i)))
 		{
-			_putchar(*(str + i));
-			chars++;
+			if (_putchar(*(str + i)))
+				chars++;
 		}
 		else
 		{
 			c = *(str + i);
 			base = 'A' + (c >= 'a') * ('a' - 'A');
-			_putchar((((c - base) + 13) % 26) + base);
-			chars++;
+			if (_putchar((((c - base) + 13) % 26) + base))
+				chars++;
 		}
 	}
 	return (chars);

@@ -26,6 +26,9 @@ int print_str(char *str, const char spec)
 		case 'r':
 			chars += print_reverse(str);
 			break;
+		case 'R':
+			chars += rot13(str);
+			break;
 		default:
 			break;
 	}

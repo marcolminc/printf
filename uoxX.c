@@ -4,12 +4,12 @@
 #include <stdio.h>
 
 /**
- * print_unsigned - prints an integer as unsigned number
+ * print_unsigned_int - prints an integer as unsigned number
  * @n: the integer to print
  *
  * Return: number of digits actually printed
  */
-int print_unsigned(const int n)
+int print_unsigned_int(const int n)
 {
 	unsigned int num, place;
 	int chars;
@@ -60,6 +60,8 @@ int print_unsigned_octal(const int n)
 /**
  * print_unsigned_hex - prints an integer as an unsigned octal number
  * @n: the integer to print
+ * @capital: specifier for letters in the hex digits
+ * (0 for small letters, 1 for capital letters
  *
  * Return: number of digits actually printed
  */

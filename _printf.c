@@ -28,7 +28,7 @@ int _printf(const char *format, ...)
 				case 'd': case 'i': case 'b': case 'u': case 'o': case 'x': case 'X':
 					chars += print_num(va_arg(ap, int), format[i]);
 					continue;
-				case 's': case 'r':
+				case 's': case 'r': case 'R':
 					chars += print_str(va_arg(ap, char *), format[i]);
 					continue;
 				case '%':

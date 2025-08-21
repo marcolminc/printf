@@ -23,7 +23,7 @@ int print_num(int num, const char spec)
 			digits += print_bin(num);
 			break;
 		case 'u':
-			digits += print_unsigned(num);
+			digits += print_unsigned_int(num);
 			break;
 		case 'o':
 			digits += print_unsigned_octal(num);
