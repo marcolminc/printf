@@ -15,26 +15,29 @@ int _printf(const char *format, ...)
 	if (!format)
 		return (-1);
 	va_start(ap, format), chars = 0;
-	for (i = 0; format[i] && format[i] != '\0'; i++)
+	for (i = 0; format[i] != '\0'; i++)
 	{
 		if (format[i] == '%')
 		{
 			switch (format[++i])
 			{
 				case 'c':
-					_putchar(va_arg(ap, int)) ? chars++ : chars;
+					if (_putchar(va_arg(ap, int)) != EOF)
+						chars++;
 					continue;
 				case 's':
 					chars += print_str(va_arg(ap, char *), 's');
 					continue;
 				case '%':
-					_putchar('%') ? chars++ : chars;
+					if (_putchar('%'))
+						chars++;
 					continue;
 				default:
 					i--;
 			}
 		}
-		_putchar(format[i]) ? chars++ : chars;
+		if (format[i] && _putchar(format[i]) != EOF)
+			chars++;
 	}
 	return (chars);
 }
