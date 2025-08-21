@@ -1,7 +1,7 @@
 #include "main.h"
+#include <stddef.h>
 
-
-/* some prototypes */
+/* prototypes */
 int print_normal(char *);
 int print_reverse(char *);
 
@@ -25,9 +25,6 @@ int print_str(char *str, const char spec)
 			break;
 		case 'r':
 			chars += print_reverse(str);
-			break;
-		case 'R':
-			chars += rot13(str);
 			break;
 		default:
 			break;
@@ -77,3 +74,4 @@ int print_reverse(char *str)
 	}
 	return (chars);
 }
+
