@@ -92,3 +92,35 @@ int print_unsigned_hex(const int n, const int capital)
 	}
 	return (chars);
 }
+
+
+/**
+ * print_address- prints an address in lowercase hex.
+ * @addr: the address to print
+ *
+ * Return: number of (hex) digits actually printed
+ */
+int print_address(const void *addr)
+{
+	int chars, digit;
+	const char *hex_digits;
+	unsigned long int num, place;
+
+	if (!addr)
+		return (-1);
+	num = (unsigned long int)addr;
+	hex_digits = "0123456789abcdef";
+	chars = 0;
+	place = 1;
+	chars += print_str("0x", 's');
+	while (num / place >= 16)
+		place *= 16;
+	while (place > 0)
+	{
+		digit = (int)(num / place);
+		if (_putchar(hex_digits[digit]) != EOF)
+			chars++;
+		num %= place, place /= 16;
+	}
+	return (chars);
+}

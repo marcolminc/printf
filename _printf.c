@@ -31,6 +31,9 @@ int _printf(const char *format, ...)
 				case 's': case 'r': case 'R':
 					chars += print_str(va_arg(ap, char *), format[i]);
 					continue;
+				case 'p':
+					chars += print_address(va_arg(ap, void *));
+					continue;
 				case '%':
 					if (_putchar('%'))
 						chars++;

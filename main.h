@@ -18,6 +18,7 @@ int print_unsigned_int(int);
 int print_unsigned_octal(int);
 int print_unsigned_hex(int, int);
 int rot13(const char *);
+int print_address(const void *);
 
 
 #endif /* MAIN_H */
