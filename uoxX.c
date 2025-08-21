@@ -107,7 +107,7 @@ int print_address(const void *addr)
 	unsigned long int num, place;
 
 	if (!addr)
-		return (-1);
+		return (print_str("(nil)", 's'));
 	num = (unsigned long int)addr;
 	hex_digits = "0123456789abcdef";
 	chars = 0;
