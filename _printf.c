@@ -29,6 +29,9 @@ int _printf(const char *format, ...)
 				case 'i':
 					chars += print_int(va_arg(ap, int));
 					continue;
+				case 'b':
+					chars += print_bin(va_arg(ap, int));
+					continue;
 				case 's':
 					chars += print_str(va_arg(ap, char *), 's');
 					continue;
