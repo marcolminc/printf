@@ -39,5 +39,6 @@ int _printf(const char *format, ...)
 		if (format[i] && _putchar(format[i]) != EOF)
 			chars++;
 	}
+	va_end(ap);
 	return (chars);
 }
