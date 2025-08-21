@@ -16,9 +16,10 @@ int print_num(int, char);
 int place_value(__int128_t);
 int print_unsigned_int(int);
 int print_unsigned_octal(int);
-int print_unsigned_hex(int, int);
+int print_unsigned_hex(int, int, int);
 int rot13(const char *);
 int print_address(const void *);
+int print_Str(const char *);
 
 
 #endif /* MAIN_H */

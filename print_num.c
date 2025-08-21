@@ -29,10 +29,10 @@ int print_num(int num, const char spec)
 			digits += print_unsigned_octal(num);
 			break;
 		case 'x':
-			digits += print_unsigned_hex(num, 0);
+			digits += print_unsigned_hex(num, 0, 0);
 			break;
 		case 'X':
-			digits += print_unsigned_hex(num, 1);
+			digits += print_unsigned_hex(num, 1, 0);
 		default:
 			break;
 	}

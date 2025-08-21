@@ -60,12 +60,13 @@ int print_unsigned_octal(const int n)
 /**
  * print_unsigned_hex - prints an integer as an unsigned octal number
  * @n: the integer to print
- * @capital: specifier for letters in the hex digits
- * (0 for small letters, 1 for capital letters
+ * @capital: specifies whether to capitalize letter digits
+ * @pad: specifies whether to pad with 0 numbers with less
+ * than 2 digits
  *
  * Return: number of digits actually printed
  */
-int print_unsigned_hex(const int n, const int capital)
+int print_unsigned_hex(const int n, const int capital, const int pad)
 {
 	unsigned int num, place;
 	int chars, digit;
@@ -86,6 +87,9 @@ int print_unsigned_hex(const int n, const int capital)
 	while (place > 0)
 	{
 		digit = (int)(num / place);
+		if (pad && digit < 16)
+			if (_putchar('0') != EOF)
+				chars++;
 		if (_putchar(hex_digits[digit]) != EOF)
 			chars++;
 		num %= place, place /= 16;

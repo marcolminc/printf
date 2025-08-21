@@ -29,6 +29,9 @@ int print_str(char *str, const char spec)
 		case 'R':
 			chars += rot13(str);
 			break;
+		case 'S':
+			chars += print_Str(str);
+			break;
 		default:
 			break;
 	}
@@ -78,3 +81,29 @@ int print_reverse(char *str)
 	return (chars);
 }
 
+
+/**
+ * print_Str - prints a string while rendering
+ * non-printable characters as their 0-padded hex values.
+ * @str: the string to print
+ *
+ * Return: number of characters actually printed
+ */
+int print_Str(const char *str)
+{
+
+	int chars;
+	char c;
+
+	chars = 0;
+	while (str && *str != '\0')
+	{
+		c = *str++;
+		if ((c > 0 && c < 32) || c >= 127)
+			chars += _printf("\\x") + print_unsigned_hex(c, 1, 1);
+		else
+			if (_putchar(c))
+				chars++;
+	}
+	return (chars);
+}
