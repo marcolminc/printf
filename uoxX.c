@@ -84,12 +84,12 @@ int print_unsigned_hex(const int n, const int capital, const int pad)
 	place = 1;
 	while (num / place >= 16)
 		place *= 16;
+	if (pad && place < 16)
+		if (_putchar('0') != EOF)
+			chars++;
 	while (place > 0)
 	{
 		digit = (int)(num / place);
-		if (pad && digit < 16)
-			if (_putchar('0') != EOF)
-				chars++;
 		if (_putchar(hex_digits[digit]) != EOF)
 			chars++;
 		num %= place, place /= 16;
