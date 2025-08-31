@@ -16,10 +16,11 @@ int _printf(const char *format, ...)
 	if (!format)
 		return (-1);
 	buf = buff_init(), va_start(ap, format);
+	if (!buf)
+		return (-1);
 	for (i = 0; format[i] != '\0'; i++)
 	{
 		if (format[i] == '%')
-		{
 			switch (format[++i])
 			{
 				case 'c':
@@ -42,7 +43,6 @@ int _printf(const char *format, ...)
 				default:
 					i--;
 			}
-		}
 		if (format[i])
 			_putchar(buf, format[i]);
 	}

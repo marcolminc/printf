@@ -13,7 +13,7 @@ Buffer *buff_init()
 
 	buf = malloc(sizeof(Buffer));
 	if (buf)
-		buf->pos = buf->wr = 0;
+		buf->pos = buf->wr = buf->fwr = 0;
 	return (buf);
 }
 
@@ -27,12 +27,14 @@ Buffer *buff_init()
  */
 void buff_flush(Buffer *buf)
 {
-	if (buf->pos > 0)
+	if (!buf->fwr && buf->pos > 0)
 	{
-		write(STDOUT_FILENO, buf->data, buf->pos);
-		buf->wr += buf->pos;
-		buf->pos = 0;
+		if (write(STDOUT_FILENO, buf->data, buf->pos) != EOF)
+			buf->wr += buf->pos, buf->pos = 0;
+		else
+			buf->fwr = 1;
 	}
+
 }
 
 
@@ -41,14 +43,16 @@ void buff_flush(Buffer *buf)
  *
  * @buf: The buffer
  *
- * Return: number of characters so far printed
+ * Return: number of characters so far printed, -1 otherwise
  */
 size_t free_buff(Buffer *buf)
 {
-	size_t chars_wr;
+	size_t res;
 
-	chars_wr = buf->wr;
+	if (!buf->fwr)
+		res = buf->wr;
+	else
+		res = -1;
 	free(buf);
-	return (chars_wr);
+	return (res);
 }
-
