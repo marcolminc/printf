@@ -11,12 +11,22 @@
 /* definitions */
 #define BUFF_LIMIT 1024
 
-typedef struct
+/**
+ * struct buff_t - a buffer for printing characters to stdout with write()
+ *
+ * @data: The (array of) characters to print
+ * @pos: Current index position to add a new character at
+ * @wr: Characters currently successfully written
+ *
+ * Description: The buffer implementation for printing characters to the stdout
+ * without using too much sys calls.
+ */
+typedef struct buff_t
 {
 	char data[BUFF_LIMIT];
 	size_t pos;
 	size_t wr;
-}Buffer;
+} Buffer;
 
 
 /* prototypes */
