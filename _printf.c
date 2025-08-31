@@ -9,12 +9,13 @@
  */
 int _printf(const char *format, ...)
 {
-	int chars, i;
+	int i;
 	va_list ap;
+	Buffer *buf;
 
 	if (!format)
 		return (-1);
-	va_start(ap, format), chars = 0;
+	buf = buff_init(), va_start(ap, format);
 	for (i = 0; format[i] != '\0'; i++)
 	{
 		if (format[i] == '%')
@@ -22,21 +23,19 @@ int _printf(const char *format, ...)
 			switch (format[++i])
 			{
 				case 'c':
-					if (_putchar(va_arg(ap, int)) != EOF)
-						chars++;
+					_putchar(buf, va_arg(ap, int));
 					continue;
 				case 'd': case 'i': case 'b': case 'u': case 'o': case 'x': case 'X':
-					chars += print_num(va_arg(ap, int), format[i]);
+					print_num(buf, va_arg(ap, int), format[i]);
 					continue;
 				case 's': case 'r': case 'R': case 'S':
-					chars += print_str(va_arg(ap, char *), format[i]);
+					print_str(buf, va_arg(ap, char *), format[i]);
 					continue;
 				case 'p':
-					chars += print_address(va_arg(ap, void *));
+					print_address(buf, va_arg(ap, void *));
 					continue;
 				case '%':
-					if (_putchar('%'))
-						chars++;
+					_putchar(buf, '%');
 					continue;
 				case '\0':
 					return (-1);
@@ -44,9 +43,10 @@ int _printf(const char *format, ...)
 					i--;
 			}
 		}
-		if (format[i] && _putchar(format[i]) != EOF)
-			chars++;
+		if (format[i])
+			_putchar(buf, format[i]);
 	}
 	va_end(ap);
-	return (chars);
+	buff_flush(buf);
+	return ((int)free_buff(buf));
 }

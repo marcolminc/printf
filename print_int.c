@@ -36,25 +36,26 @@ int place_value(__int128_t n)
 
 
 /**
- * print_int - prints the decimal integer n
- * @n: the decimal number to print
+ * print_int - prints the decimal integer n via a buffer
  *
- * Return: number of digits (characters) printed
+ * @buf: The buffer
+ * @n: The decimal number to print
+ *
+ * Return: Nothing.
  */
-int print_int(int n)
+void print_int(Buffer *buf, const int n)
 {
 	__int128_t num;
-	int place, digit, chars;
+	int place, digit;
 
-	chars = 0, num = n;
+	num = n;
 	if (num < 0)
-		_putchar('-'), chars++, num *= -1;
+		_putchar(buf, '-'), num *= -1;
 	place = place_value(num);
 	while (place > 0)
 	{
 		digit = num / place;
-		_putchar(digit + '0'), chars++;
+		_putchar(buf, digit + '0');
 		num %= place, place /= 10;
 	}
-	return (chars);
 }

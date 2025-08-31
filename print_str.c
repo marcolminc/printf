@@ -2,108 +2,106 @@
 #include <stddef.h>
 
 /* prototypes */
-int print_normal(char *);
-int print_reverse(char *);
+void print_normal(Buffer *, char *);
+void print_reverse(Buffer *, char *);
 
 
 /**
  * print_str - prints a string, as specified by a specifier character
- * @str: the string to print
- * @spec: the specifier character
+ * via a buffer
  *
- * Return: number of characters actually printed
+ * @buf: The buffer
+ * @str: The string to print
+ * @spec: The specifier character
+ *
+ * Return: Nothing.
  */
-int print_str(char *str, const char spec)
+void print_str(Buffer *buf, char *str, const char spec)
 {
-	int chars;
-
-	chars = 0;
 	switch (spec)
 	{
 		case 's':
-			chars += print_normal(str);
+			print_normal(buf, str);
 			break;
 		case 'r':
-			chars += print_reverse(str);
+			print_reverse(buf, str);
 			break;
 		case 'R':
-			chars += rot13(str);
+			rot13(buf, str);
 			break;
 		case 'S':
-			chars += print_Str(str);
+			print_Str(buf, str);
 			break;
 		default:
 			break;
 	}
-	return (chars);
 }
 
 
 /**
- * print_normal - prints a string in a normal fashion
- * @str: string to print
+ * print_normal - prints a string in a normal fashion via a buffer
  *
- * Return: number of characters actually printed
+ * @buf: The buffer
+ * @str: String to print
+ *
+ * Return: Nothing
  */
-int print_normal(char *str)
+void print_normal(Buffer *buf, char *str)
 {
-	int chars;
-
-	chars = 0;
 	if (!str)
 		str = "(null)";
 	while (str && *str != '\0')
-		_putchar(*str++) ? chars++ : chars;
-	return (chars);
+		_putchar(buf, *str++);
 }
 
 
 /**
  * print_reverse - prints a string in reverse order (fashion)
- * @str: the string to print (in reverse)
+ * via a buffer
  *
- * Return: number of chars actually printed
+ * @buf: The buffer
+ * @str: The string to print (in reverse)
+ *
+ * Return: Nothing
  */
-int print_reverse(char *str)
+void print_reverse(Buffer *buf, char *str)
 {
-	int chars;
 	size_t len;
 
-	chars = 0, len = 0;
+	len = 0;
 	if (str)
 	{
 		while (*str != '\0')
 			str++, len++;
 		str--;
 		while (len > 0)
-			_putchar(*str--), chars++, len--;
+			_putchar(buf, *str--), len--;
 	}
-	return (chars);
 }
 
 
 /**
- * print_Str - prints a string while rendering
- * non-printable characters as their 0-padded hex values.
- * @str: the string to print
+ * print_Str - prints a string while rendering non-printable characters
+ * as their 0-padded hex values, via a buffer
  *
- * Return: number of characters actually printed
+ * @buf: The buffer
+ * @str: The string to print
+ *
+ * Return: Nothing
  */
-int print_Str(const char *str)
+void print_Str(Buffer *buf, const char *str)
 {
-
-	int chars;
 	char c;
 
-	chars = 0;
 	while (str && *str != '\0')
 	{
 		c = *str++;
 		if ((c > 0 && c < 32) || c >= 127)
-			chars += _printf("\\x") + print_unsigned_hex(c, 1, 1);
+		{
+			print_normal(buf, "\\x");
+			print_unsigned_hex(buf, c, 1, 1);
+		}
 		else
-			if (_putchar(c))
-				chars++;
+			_putchar(buf, c);
 	}
-	return (chars);
 }

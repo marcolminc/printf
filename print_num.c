@@ -2,39 +2,38 @@
 
 
 /**
- * print_num - prints an integer in a given specifier
- * @num: the integer to print
- * @spec: the specifier on how to print the integer
+ * print_num - prints an integer in a given specifier via a buffer
  *
- * Return: number of digits actually printed
+ * @buf: The buffer
+ * @num: The integer to print
+ * @spec: The specifier on how to print the integer
+ *
+ * Return: Nothing
  */
-int print_num(int num, const char spec)
+void print_num(Buffer *buf, const int num, const char spec)
 {
-	int digits;
-
-	digits = 0;
 	switch (spec)
 	{
-		case 'd': case 'i':
-			digits += print_int(num);
+		case 'd':
+		case 'i':
+			print_int(buf, num);
 			break;
-
 		case 'b':
-			digits += print_bin(num);
+			print_bin(buf, num);
 			break;
 		case 'u':
-			digits += print_unsigned_int(num);
+			print_unsigned_int(buf, num);
 			break;
 		case 'o':
-			digits += print_unsigned_octal(num);
+			print_unsigned_octal(buf, num);
 			break;
 		case 'x':
-			digits += print_unsigned_hex(num, 0, 0);
+			print_unsigned_hex(buf, num, 0, 0);
 			break;
 		case 'X':
-			digits += print_unsigned_hex(num, 1, 0);
+			print_unsigned_hex(buf, num, 1, 0);
+			break;
 		default:
 			break;
 	}
-	return (digits);
 }

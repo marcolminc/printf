@@ -13,31 +13,27 @@ int _isalpha(const char c)
 }
 
 /**
- * rot13 - prints a string in rot13'ed fashion
- * @str: the string to print
+ * rot13 - prints a string in rot13'ed fashion via a buffer
  *
- * Return: actual number of characters printed
+ * @buf: The buffer
+ * @str: The string to print
+ *
+ * Return: Nothing
  */
-int rot13(const char *str)
+void rot13(Buffer *buf, const char *str)
 {
-	int i, chars;
+	int i;
 	unsigned char c, base;
 
-	chars = 0;
 	for (i = 0; str && *(str + i) != '\0'; i++)
 	{
 		if (!_isalpha(*(str + i)))
-		{
-			if (_putchar(*(str + i)))
-				chars++;
-		}
+			_putchar(buf, *(str + i));
 		else
 		{
 			c = *(str + i);
 			base = 'A' + (c >= 'a') * ('a' - 'A');
-			if (_putchar((((c - base) + 13) % 26) + base))
-				chars++;
+			_putchar(buf, (((c - base) + 13) % 26) + base);
 		}
 	}
-	return (chars);
 }
