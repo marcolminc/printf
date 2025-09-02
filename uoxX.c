@@ -1,7 +1,8 @@
 #include "main.h"
 #include <limits.h>
 #include <stddef.h>
-#include <stdint.h>
+#include <stdio.h>
+
 /**
  * print_unsigned_int - prints an integer as unsigned number via a buffer
  *
@@ -104,28 +105,28 @@ void print_unsigned_hex(Buffer *buf, const int n, const int capital,
  * print_address- prints an address in lowercase hex via a buffer
  *
  * @buf: The buffer
- * @ptr: The address to print
+ * @addr: The address to print
  *
  * Return: Nothing
  */
-void print_address(Buffer *buf, void *ptr)
+void print_address(Buffer *buf, void *addr)
 {
-	char hex_buff[20];
-	int i, hex_i, shift;
-	uintptr_t addr;
-	uint8_t nibble;
+	int digit;
+	const char *hex_digits;
+	unsigned long int num, place;
 
-	i = hex_i = 0;
-	addr = (uintptr_t)ptr;
-	hex_buff[hex_i++] = '0';
-	hex_buff[hex_i++] = 'x';
-	shift = (sizeof(uintptr_t) * 2) - 1;
-	for (; shift >= 0; shift--)
+	if (!addr)
+		print_str(buf, "(nil)", 's');
+	num = (unsigned long int)addr;
+	hex_digits = "0123456789abcdef";
+	place = 1;
+	print_str(buf, "0x", 's');
+	while (num / place >= 16)
+		place *= 16;
+	while (place > 0)
 	{
-		nibble = (addr >> (shift * 4)) & 0xF;
-		hex_buff[hex_i] = (nibble < 10) ? ('0' + nibble) : ('a' + nibble - 10);
+		digit = (int)(num / place);
+		_putchar(buf, hex_digits[digit]);
+		num %= place, place /= 16;
 	}
-	hex_buff[hex_i] = '\0';
-	for (; hex_buff[i] != '\0'; i++)
-		_putchar(buf, hex_buff[i]);
 }
