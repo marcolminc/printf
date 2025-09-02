@@ -116,7 +116,10 @@ void print_address(Buffer *buf, void *addr)
 	unsigned long int num, place;
 
 	if (!addr)
+	{
 		print_str(buf, "(nil)", 's');
+		return;
+	}
 	num = (unsigned long int)addr;
 	hex_digits = "0123456789abcdef";
 	place = 1;
