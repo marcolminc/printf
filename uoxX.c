@@ -106,10 +106,11 @@ void print_unsigned_hex(Buffer *buf, const int n, const int capital,
  *
  * @buf: The buffer
  * @addr: The address to print
+ * @flgs: The flags object
  *
  * Return: Nothing
  */
-void print_address(Buffer *buf, void *addr)
+void print_address(Buffer *buf, void *addr, Flags *flgs)
 {
 	int digit;
 	const char *hex_digits;
@@ -123,6 +124,8 @@ void print_address(Buffer *buf, void *addr)
 	num = (unsigned long int)addr;
 	hex_digits = "0123456789abcdef";
 	place = 1;
+	if (flgs->plus)
+		_putchar(buf, '+');
 	print_str(buf, "0x", 's');
 	while (num / place >= 16)
 		place *= 16;

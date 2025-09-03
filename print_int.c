@@ -40,10 +40,11 @@ int place_value(__int128_t n)
  *
  * @buf: The buffer
  * @n: The decimal number to print
+ * @flgs: The flags object
  *
  * Return: Nothing.
  */
-void print_int(Buffer *buf, const int n)
+void print_int(Buffer *buf, const int n, Flags *flgs)
 {
 	__int128_t num;
 	int place, digit;
@@ -51,6 +52,8 @@ void print_int(Buffer *buf, const int n)
 	num = n;
 	if (num < 0)
 		_putchar(buf, '-'), num *= -1;
+	else if (flgs->plus)
+		_putchar(buf, '+');
 	place = place_value(num);
 	while (place > 0)
 	{

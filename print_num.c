@@ -7,16 +7,17 @@
  * @buf: The buffer
  * @num: The integer to print
  * @spec: The specifier on how to print the integer
+ * @flgs: The flags object
  *
  * Return: Nothing
  */
-void print_num(Buffer *buf, const int num, const char spec)
+void print_num(Buffer *buf, const int num, const char spec, Flags *flgs)
 {
 	switch (spec)
 	{
 		case 'd':
 		case 'i':
-			print_int(buf, num);
+			print_int(buf, num, flgs);
 			break;
 		case 'b':
 			print_bin(buf, num);
